@@ -1,0 +1,1 @@
+# The APIs folder is used to store files related to consuming RESTful APIs or other web services
