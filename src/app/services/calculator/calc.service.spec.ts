@@ -2,31 +2,54 @@ import { SharedService } from "../shared.service"
 import { CalcService } from "./calc.service"
 
 describe("CalcService", () => {
+
+  let shared : SharedService
+  let calc: CalcService
+
+  beforeEach(()=>{
+    console.log("Before each called");
+    shared = new SharedService
+    calc = new CalcService(shared)
+  })
+
   it("Should multiply two numbers", () => {
-    const shared = new SharedService
-    const calc = new CalcService(shared)
+    // const shared = new SharedService
+    // const calc = new CalcService(shared)
     const result = calc.multiply(3, 5)
     expect(result).toBe(15)
   })
 
-  // In above CalcService() function we have called another function
-  // So we have to ensure that was called.
-  // To test that we can use Spy()
-
-  it("Should called sharedFunction()", () => {
-    const shared = new SharedService
-    spyOn(shared, "sharedFunction") // Only test function is called
-    // spyOn(shared,"sharedFunction").and.callThrough() // test the function is exicuted and exicute the function
-    const calc = new CalcService(shared)
-    const result = calc.multiply(3, 5)
-    expect(shared.sharedFunction).toHaveBeenCalled()
+  it("Should add two numbers", () => {
+    // const shared = new SharedService
+    // const calc = new CalcService(shared)
+    const result = calc.add(3, 5)
+    expect(result).toBe(8)
   })
 
-  it("Test Without calling constructor", () => {
-    const shared = jasmine.createSpyObj("SharedService", ["sharedFunction"]) // Instead of create new object here we created Mock Service
-    // spyOn(shared, "sharedFunction") // Here we don't need spyOn()
-    const calc = new CalcService(shared)
-    const result = calc.multiply(3, 5)
-    expect(shared.sharedFunction).toHaveBeenCalled()
-  })
+
+
+  // If we want to test multiply and add functions we have to write two tests cases
+  // But i here we have repeated codes
+  // To avoid from releated codes we can use before each as above
+  // it("Should multiply two numbers", () => {
+  //   const shared = new SharedService
+  //   const calc = new CalcService(shared)
+  //   const result = calc.multiply(3, 5)
+  //   expect(result).toBe(15)
+  // })
+
+  // it("Should add two numbers", () => {
+  //   const shared = new SharedService
+  //   const calc = new CalcService(shared)
+  //   const result = calc.add(3, 5)
+  //   expect(result).toBe(8)
+  // })
 })
+
+// Additional Note: =====
+
+// xdescribe // disable test suite
+// xit // disable test spec
+
+// fdescribe // run perticuler test suite only
+// fit // run perticular test spec only

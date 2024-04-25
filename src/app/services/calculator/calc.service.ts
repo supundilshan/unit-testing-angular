@@ -11,5 +11,10 @@ export class CalcService {
   multiply(a: number, b: number) {
     this.SharedService.sharedFunction()
     return a * b
+  }  
+  
+  add(a: number, b: number) {
+    this.SharedService.sharedFunction()
+    return a + b
   }
 }
